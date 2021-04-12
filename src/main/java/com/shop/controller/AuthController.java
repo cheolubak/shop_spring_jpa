@@ -1,5 +1,6 @@
 package com.shop.controller;
 
+import com.shop.domain.dao.User;
 import com.shop.domain.dto.AuthDTO;
 import com.shop.domain.dto.UserDTO;
 import com.shop.service.UserService;
@@ -19,9 +20,13 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @RequestMapping("/login")
+    @RequestMapping(
+            path = "/login",
+            method = RequestMethod.POST
+    )
     public ResponseEntity<UserDTO> login(@RequestBody AuthDTO login) {
-
+        UserDTO user = userService.login(login.getUsername(), login.getPassword());
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @RequestMapping(
