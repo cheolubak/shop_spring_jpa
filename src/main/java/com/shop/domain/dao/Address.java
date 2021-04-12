@@ -35,6 +35,9 @@ public class Address {
     @JoinColumn(name = "user_id")
     public User user;
 
+    public Address() {
+    }
+
     public Address(AddressDTO address) {
         this.name = address.getName();
         this.buyer = address.getBuyer();

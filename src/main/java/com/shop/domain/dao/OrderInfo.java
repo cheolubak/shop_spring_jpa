@@ -43,4 +43,7 @@ public class OrderInfo {
     @ManyToOne
     @JoinColumn(name = "user_id")
     public User user;
+
+    public OrderInfo() {
+    }
 }

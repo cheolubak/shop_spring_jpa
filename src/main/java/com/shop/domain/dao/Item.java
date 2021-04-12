@@ -37,4 +37,7 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "user_id")
     public User user;
+
+    public Item() {
+    }
 }
