@@ -1,5 +1,6 @@
 package com.shop.domain.dao;
 
+import com.shop.domain.dto.AddressDTO;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -33,4 +34,13 @@ public class Address {
     @ManyToOne
     @JoinColumn(name = "user_id")
     public User user;
+
+    public Address(AddressDTO address) {
+        this.name = address.getName();
+        this.buyer = address.getBuyer();
+        this.address = address.getAddress();
+        this.detail = address.getDetail();
+        this.postcode = address.getPostcode();
+        this.tel = address.getTel();
+    }
 }
