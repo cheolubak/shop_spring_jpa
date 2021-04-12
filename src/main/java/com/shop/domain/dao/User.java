@@ -32,4 +32,9 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public Set<Address> addresses;
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 }
