@@ -1,4 +1,4 @@
-package com.shop.domain.dao;
+package com.shop.domain.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -7,24 +7,22 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class Basket {
+public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
-
-    public Integer status;
+    private Long id;
 
     @CreationTimestamp
-    public LocalDateTime createAt;
+    private LocalDateTime createAt;
 
     @UpdateTimestamp
-    public LocalDateTime updateAt;
+    private LocalDateTime updateAt;
 
     @ManyToOne
     @JoinColumn(name = "item_id")
-    public Item item;
+    private Item item;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    public User user;
+    @JoinColumn(name = "order_info_id")
+    private OrderInfo orderInfo;
 }

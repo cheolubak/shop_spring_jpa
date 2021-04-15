@@ -1,4 +1,4 @@
-package com.shop.domain.dao;
+package com.shop.domain.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -7,20 +7,22 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class OrderPayment {
+public class ItemImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
-    public String pgid;
+    private String path;
+
+    private Boolean isdelete;
 
     @CreationTimestamp
-    public LocalDateTime createAt;
+    private LocalDateTime createAt;
 
     @UpdateTimestamp
-    public LocalDateTime updateAt;
+    private LocalDateTime updateAt;
 
-    @OneToOne
-    @JoinColumn(name = "order_info_id")
-    public OrderInfo orderInfo;
+    @ManyToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
 }

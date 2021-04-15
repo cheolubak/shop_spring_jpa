@@ -1,42 +1,41 @@
-package com.shop.domain.dao;
+package com.shop.domain.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
-    public String name;
+    private String name;
 
-    public Integer price;
+    private Integer price;
 
-    public Integer count;
+    private Integer count;
 
-    public String description;
+    private String description;
 
     @CreationTimestamp
-    public LocalDateTime createAt;
+    private LocalDateTime createAt;
 
     @UpdateTimestamp
-    public LocalDateTime updateAt;
+    private LocalDateTime updateAt;
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    public Set<ItemImage> images;
+    private Set<ItemImage> images;
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    public Set<OrderItem> orderItems;
+    private Set<OrderItem> orderItems;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    public User user;
+    private User user;
 
     public Item() {
     }

@@ -1,7 +1,5 @@
 package com.shop.domain.dto;
 
-import com.shop.domain.dao.Address;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -26,17 +24,6 @@ public class AddressDTO {
     private Long userId;
 
     public AddressDTO() {
-    }
-
-    public AddressDTO(Address address) {
-        this.id = address.id;
-        this.name = address.name;
-        this.buyer = address.buyer;
-        this.address = address.address;
-        this.detail = address.detail;
-        this.postcode = address.postcode;
-        this.tel = address.tel;
-        this.userId = address.user.id;
     }
 
     public Long getId() {

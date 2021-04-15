@@ -1,10 +1,8 @@
 package com.shop.controller;
 
-import com.shop.domain.dao.User;
 import com.shop.domain.dto.AuthDTO;
 import com.shop.domain.dto.UserDTO;
 import com.shop.service.UserService;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
