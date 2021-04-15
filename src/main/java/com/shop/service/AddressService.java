@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -29,6 +30,7 @@ public class AddressService {
         this.addressRepository = addressRepository;
     }
 
+    @Transactional
     public AddressDTO registerAddress(AddressDTO addressDTO) {
         Optional<User> findUser = userRepository.findById(addressDTO.getUserId());
         if (findUser.isPresent()) {
@@ -53,6 +55,7 @@ public class AddressService {
         }
     }
 
+    @Transactional
     public Set<AddressDTO> getAddressList(Long userId) {
         Optional<User> findUser = userRepository.findById(userId);
         if (findUser.isPresent()) {
