@@ -37,11 +37,11 @@ public class Address {
     public Address() {
     }
 
-    Long getId() {
+    public Long getId() {
         return this.id;
     }
 
-    String getName() {
+    public String getName() {
         return this.name;
     }
 
@@ -75,5 +75,41 @@ public class Address {
 
     public User getUser() {
         return user;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBuyer(String buyer) {
+        this.buyer = buyer;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public void setCreateAt(LocalDateTime createAt) {
+        this.createAt = createAt;
+    }
+
+    public void setUpdateAt(LocalDateTime updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

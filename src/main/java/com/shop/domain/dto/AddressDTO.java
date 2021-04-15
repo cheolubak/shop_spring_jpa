@@ -1,5 +1,7 @@
 package com.shop.domain.dto;
 
+import com.shop.domain.entity.Address;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -24,6 +26,16 @@ public class AddressDTO {
     private Long userId;
 
     public AddressDTO() {
+    }
+
+    public AddressDTO(Address address) {
+        id = address.getId();
+        name = address.getName();
+        buyer = address.getBuyer();
+        this.address = address.getAddress();
+        detail = address.getDetail();
+        postcode = address.getPostcode();
+        tel = address.getTel();
     }
 
     public Long getId() {
