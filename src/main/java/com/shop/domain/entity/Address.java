@@ -7,31 +7,74 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "address")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(
+            name = "id",
+            nullable = false
+    )
     private Long id;
 
+    @Column(
+            name = "name",
+            nullable = false,
+            length = 20
+    )
     private String name;
 
+    @Column(
+            name = "buyer",
+            nullable = false,
+            length = 20
+    )
     private String buyer;
 
+    @Column(
+            name = "address",
+            nullable = false,
+            length = 100
+    )
     private String address;
 
+    @Column(
+            name = "detail",
+            nullable = false,
+            length = 100
+    )
     private String detail;
 
+    @Column(
+            name = "postcode",
+            nullable = false,
+            length = 6
+    )
     private String postcode;
 
+    @Column(
+            name = "tel",
+            nullable = false,
+            length = 11
+    )
     private String tel;
 
     @CreationTimestamp
+    @Column(
+            name = "create_at",
+            nullable = false
+    )
     private LocalDateTime createAt;
 
     @UpdateTimestamp
+    @Column(
+            name = "update_at",
+            nullable = false
+    )
     private LocalDateTime updateAt;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "address_user_fk"), nullable = false)
     private User user;
 
     public Address() {

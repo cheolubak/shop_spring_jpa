@@ -7,22 +7,20 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "basket")
-public class Basket {
+@Table(name = "access_token")
+public class AccessToken {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(
-            name = "id",
+            name = "token",
             nullable = false
     )
-    private Long id;
+    private String token;
 
     @Column(
-            name = "status",
-            nullable = false,
-            columnDefinition = "TINYINT(1) NOT NULL COMMENT '0: 삭제\n1: 존재\n2: 주문'"
+            name = "client_key",
+            nullable = false
     )
-    private Integer status;
+    private String clientKey;
 
     @CreationTimestamp
     @Column(
@@ -39,10 +37,9 @@ public class Basket {
     private LocalDateTime updateAt;
 
     @ManyToOne
-    @JoinColumn(name = "item_id", foreignKey = @ForeignKey(name = "basket_item_fk"), nullable = false)
-    private Item item;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "basket_user_fk"), nullable = false)
+    @JoinColumn(
+            name = "user_id",
+            foreignKey = @ForeignKey(name = "access_token_user_fk")
+    )
     private User user;
 }

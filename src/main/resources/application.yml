@@ -9,14 +9,18 @@ spring:
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    open-in-view: false
     show-sql: true
-    generate-ddl: true
+    generate-ddl: false
     hibernate:
       ddl-auto: create
     properties:
       hibernate:
         format_sql: true
+        hbm2ddl:
+          auto: update
+        jdbc:
+          lob:
+            non_contextual_creation: true
 jwt:
   header: Authorization
   secret:

@@ -7,23 +7,48 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "item_image")
 public class ItemImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(
+            name = "id",
+            nullable = false
+    )
     private Long id;
 
+    @Column(
+            name = "path",
+            nullable = false
+    )
     private String path;
 
-    private Boolean isdelete;
+    @Column(
+            name = "is_delete",
+            nullable = false
+    )
+    private Boolean isDelete = false;
 
     @CreationTimestamp
+    @Column(
+            name = "create_at",
+            nullable = false
+    )
     private LocalDateTime createAt;
 
     @UpdateTimestamp
+    @Column(
+            name = "update_at",
+            nullable = false
+    )
     private LocalDateTime updateAt;
 
     @ManyToOne
-    @JoinColumn(name = "item_id")
+    @JoinColumn(
+            name = "item_id",
+            foreignKey = @ForeignKey(name = "item_image_item_fk"),
+            nullable = false
+    )
     private Item item;
 
     public Long getId() {
@@ -38,12 +63,12 @@ public class ItemImage {
         this.path = path;
     }
 
-    public Boolean getIsdelete() {
-        return isdelete;
+    public Boolean getIsDelete() {
+        return isDelete;
     }
 
-    public void setIsdelete(Boolean isdelete) {
-        this.isdelete = isdelete;
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
     }
 
     public LocalDateTime getCreateAt() {

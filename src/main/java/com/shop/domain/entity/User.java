@@ -11,6 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(
+        name = "user",
         uniqueConstraints = {
                 @UniqueConstraint(
                         name = "user_username_unique",
@@ -21,25 +22,57 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(
+            name = "id",
+            nullable = false
+    )
     private Long id;
 
+    @Column(
+            name = "username",
+            nullable = false
+    )
     private String username;
 
+    @Column(
+            name = "password",
+            nullable = false
+    )
     private String password;
 
     @CreationTimestamp
+    @Column(
+            name = "create_at",
+            nullable = false
+    )
     private LocalDateTime createAt;
 
     @UpdateTimestamp
+    @Column(
+            name = "update_at",
+            nullable = false
+    )
     private LocalDateTime updateAt;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
     private Set<Item> items;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
     private Set<OrderInfo> orderInfos;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
     private Set<Address> addresses;
 
     public User() {

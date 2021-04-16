@@ -8,34 +8,75 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
+@Table(name = "item")
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(
+            name = "id",
+            nullable = false
+    )
     private Long id;
 
+    @Column(
+            name = "name",
+            nullable = false
+    )
     private String name;
 
+    @Column(
+            name = "price",
+            nullable = false
+    )
     private Integer price;
 
+    @Column(
+            name = "count",
+            nullable = false
+    )
     private Integer count;
 
+    @Column(
+            name = "description",
+            nullable = false
+    )
     private String description;
 
     @CreationTimestamp
+    @Column(
+            name = "create_at",
+            nullable = false
+    )
     private LocalDateTime createAt;
 
     @UpdateTimestamp
+    @Column(
+            name = "update_at",
+            nullable = false
+    )
     private LocalDateTime updateAt;
 
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne
+    @JoinColumn(
+            name = "user_id",
+            foreignKey = @ForeignKey(name = "item_user_fk"),
+            nullable = false
+    )
+    private User user;
+
+    @OneToMany(
+            mappedBy = "item",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
     private Set<ItemImage> images;
 
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(
+            mappedBy = "item",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
     private Set<OrderItem> orderItems;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
     public Item() {
     }
