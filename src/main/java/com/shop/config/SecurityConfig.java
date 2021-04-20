@@ -1,6 +1,7 @@
 package com.shop.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -8,11 +9,18 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    public SecurityConfig() {
+
+    private final AccessTokenFilter accessTokenFilter;
+
+    public SecurityConfig(
+            AccessTokenFilter accessTokenFilter
+    ) {
+        this.accessTokenFilter = accessTokenFilter;
     }
 
     @Bean
@@ -23,29 +31,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .httpBasic().disable()
                 .csrf().disable()
-                .exceptionHandling()
-
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .formLogin().disable()
-                .headers().frameOptions().disable()
-
-                .and()
-                .headers()
-                .frameOptions()
-                .sameOrigin()
-
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
-                .and()
+                .addFilterAt(accessTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-//                .antMatchers("/login").permitAll()
-//                .antMatchers("/signup").permitAll()
-                .antMatchers("/**").permitAll()
-                .anyRequest()
-                .authenticated();
+//                .antMatchers(HttpMethod.OPTIONS, "*/").permitAll()
+                .antMatchers("/login", "/signup").permitAll();
     }
 }

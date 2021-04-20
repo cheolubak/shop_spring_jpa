@@ -22,6 +22,12 @@ public class AccessToken {
     )
     private String clientKey;
 
+    @Column(
+            name = "expired",
+            nullable = false
+    )
+    private LocalDateTime expired;
+
     @CreationTimestamp
     @Column(
             name = "create_at",
@@ -42,4 +48,55 @@ public class AccessToken {
             foreignKey = @ForeignKey(name = "access_token_user_fk")
     )
     private User user;
+
+    public AccessToken() {
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getClientKey() {
+        return clientKey;
+    }
+
+    public void setClientKey(String clientKey) {
+        this.clientKey = clientKey;
+    }
+
+    public LocalDateTime getExpired() {
+        return expired;
+    }
+
+    public void setExpired(LocalDateTime expired) {
+        this.expired = expired;
+    }
+
+    public LocalDateTime getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(LocalDateTime createAt) {
+        this.createAt = createAt;
+    }
+
+    public LocalDateTime getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(LocalDateTime updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
