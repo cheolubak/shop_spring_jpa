@@ -9,18 +9,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final AccessTokenFilter accessTokenFilter;
 
-    public SecurityConfig(
-            AccessTokenFilter accessTokenFilter
-    ) {
-        this.accessTokenFilter = accessTokenFilter;
+    public SecurityConfig() {
     }
 
     @Bean
@@ -34,9 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilterAt(accessTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-//                .antMatchers(HttpMethod.OPTIONS, "*/").permitAll()
-                .antMatchers("/login", "/signup").permitAll();
+                .antMatchers("*/").permitAll();
     }
 }
