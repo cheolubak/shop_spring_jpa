@@ -5,9 +5,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
-@Table(name = "order_item")
+@Table(
+        name = "order_item"
+)
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,6 +49,13 @@ public class OrderItem {
             nullable = false
     )
     private OrderInfo orderInfo;
+
+    @OneToOne(
+            mappedBy = "orderItem",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private Review review;
 
     public OrderItem() {
     }

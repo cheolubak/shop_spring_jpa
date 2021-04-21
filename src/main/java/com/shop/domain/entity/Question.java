@@ -7,13 +7,14 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-@Entity(name = "question")
+@Entity
 @Table(
         name = "question"
 )
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
     @Column(name = "title", nullable = false)
