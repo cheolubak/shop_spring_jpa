@@ -19,6 +19,7 @@ import java.util.Set;
 @Service
 public class AddressService {
     private final Logger logger = LoggerFactory.getLogger(AddressService.class);
+
     private final UserRepository userRepository;
     private final AddressRepository addressRepository;
 
@@ -31,8 +32,8 @@ public class AddressService {
     }
 
     @Transactional
-    public AddressDTO registerAddress(AddressDTO addressDTO) {
-        Optional<User> findUser = userRepository.findById(addressDTO.getUserId());
+    public AddressDTO registerAddress(Long userId, AddressDTO addressDTO) {
+        Optional<User> findUser = userRepository.findById(userId);
         if (findUser.isPresent()) {
             User user = findUser.get();
             Address address = new Address();

@@ -22,9 +22,6 @@ public class AddressDTO {
     @Pattern(regexp = "[0-9]{11}")
     private String tel;
 
-    @NotNull
-    private Long userId;
-
     public AddressDTO() {
     }
 
@@ -92,13 +89,5 @@ public class AddressDTO {
 
     public void setTel(String tel) {
         this.tel = tel;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 }

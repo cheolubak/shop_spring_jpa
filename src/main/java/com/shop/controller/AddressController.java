@@ -24,16 +24,33 @@ public class AddressController {
             path = "",
             method = RequestMethod.POST
     )
-    public ResponseEntity<AddressDTO> registerAddress(@RequestBody AddressDTO address) {
-        AddressDTO addressDTO = addressService.registerAddress(address);
+    public ResponseEntity<AddressDTO> registerAddress(
+            @RequestHeader("userId") Long userId,
+            @RequestBody AddressDTO address
+    ) {
+        AddressDTO addressDTO = addressService.registerAddress(userId, address);
         return new ResponseEntity<>(addressDTO, HttpStatus.CREATED);
+    }
+
+    @RequestMapping(
+            path = "{addressId}",
+            method = RequestMethod.PUT
+    )
+    public ResponseEntity<String> updateAddress(
+            @PathParam("addressId") Long addressId,
+            @RequestBody AddressDTO address
+    ) {
+        return new ResponseEntity<>("SUCESS", HttpStatus.OK);
     }
 
     @RequestMapping(
             path = "",
             method = RequestMethod.GET
     )
-    public ResponseEntity<Set<AddressDTO>> getAddressList(@RequestHeader("userId") Long userId) {
+    public ResponseEntity<Set<AddressDTO>> getAddressList(
+            @RequestHeader("userId") Long userId,
+            @RequestParam("count") Integer count
+    ) {
         Set<AddressDTO> addressDTOS = addressService.getAddressList(userId);
         return new ResponseEntity<>(addressDTOS, HttpStatus.OK);
     }
